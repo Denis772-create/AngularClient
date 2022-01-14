@@ -3,7 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: true,
+  firebase: {
+    authApi: 'http://localhost:5010/',
+    storeApi: 'http://localhost:5000/',
+    whitelistedDomains: ['localhost:5000']
+  }
 };
 
 /*

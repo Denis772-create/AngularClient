@@ -1,0 +1,93 @@
+<!-- <mat-card style="margin: 50px;">
+    <span>Catalog</span>
+    <mat-table [dataSource]="books">
+        <ng-container matColumnDef="id">
+            <mat-header-cell *matHeaderCellDef> ID</mat-header-cell>
+            <mat-cell *matCellDef="let book"> {{book.id}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="author">
+            <mat-header-cell *matHeaderCellDef> Author</mat-header-cell>
+            <mat-cell *matCellDef="let book"> {{book.author}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="title">
+            <mat-header-cell *matHeaderCellDef> Title</mat-header-cell>
+            <mat-cell *matCellDef="let book"> {{book.title}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="price">
+            <mat-header-cell *matHeaderCellDef> Price</mat-header-cell>
+            <mat-cell *matCellDef="let book"> {{book.price}}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columns;"></mat-row>
+
+    </mat-table>
+</mat-card> -->
+
+<mat-card style="margin: 100px;">
+    <h1>Books</h1>
+    <table *ngIf="tableMode; else create" class="table table-striped" style="width: 100%;">
+        <thead>
+            <tr>
+                <td>Author</td>
+                <td>Title</td>
+                <td>Price</td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let b of books">
+                <ng-template [ngIf]="book?.id != b.id" [ngIfElse]="edit">
+                    <td>{{b?.author}}</td>
+                    <td>{{b?.title}}</td>
+                    <td>{{b?.price}}</td>
+                    <td>
+                        <button class="my" (click)="editBook(b)">Edit</button>
+                        <button class="my" (click)="deleteBook(b)">Delete</button>
+                    </td>
+                </ng-template>
+            </tr>
+        </tbody>
+    </table>
+
+    <!--шаблон для редактирования-->
+    <ng-template #edit style="width: 100%;">
+        <td>
+            <input type="text" [(ngModel)]="book.author" class="form-control" />
+        </td>
+        <td>
+            <input type="text" [(ngModel)]="book.title" class="form-control" />
+        </td>
+        <td>
+            <input type="number" [(ngModel)]="book.price" class="form-control" />
+        </td>
+        <td>
+            <input type="button" value="Save" (click)="save()" class="my" />
+            <input type="button" value="Cancel" (click)="cancel()" class="my" />
+        </td>
+    </ng-template>
+
+    <!--шаблон для добавления-->
+    <ng-template #create style="width: 100%;">
+        <div class="form-group">
+            <label>Author: </label>
+            <input type="text" [(ngModel)]="book.author" class="myy" />
+        </div>
+        <div class="form-group">
+            <label>Title: </label>
+            <input type="text" [(ngModel)]="book.title" class="myy" />
+        </div>
+        <div class="form-group">
+            <label>Price: </label>
+            <input type="number" [(ngModel)]="book.price" class="myy" />
+        </div>
+        <div>
+            <input type="button" value="Сохранить" (click)="save()" class="my" />
+            <input type="button" value="Отмена" (click)="cancel()" class="my" />
+        </div>
+    </ng-template>
+    <input *ngIf="tableMode" type="button" value="Add" class="my" (click)="addBook()" />
+</mat-card>
