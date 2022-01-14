@@ -5,11 +5,11 @@
 export const environment = {
   production: true,
   firebase: {
-    authApi: 'http://localhost:5010/',
+    authApi: 'http://192.168.1.5:36746/',
     storeApi: 'http://localhost:5000/',
     whitelistedDomains: ['localhost:5000']
   }
-};
+}
 
 /*
  * For easier debugging in development mode, you can import the following file
@@ -19,3 +19,4 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+ 
